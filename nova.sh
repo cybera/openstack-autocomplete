@@ -13,9 +13,9 @@ _nova()
 
 	if [ "x$_nova_opts" == "x" ] ; then
 		nbc="`nova bash-completion`"
-		_nova_opts="`echo "$nbc" | sed -e "s/--[a-z0-9_-]*//g" -e "s/\s\s*/ /g"`"
-		_nova_flags="`echo " $nbc" | sed -e "s/ [^-][^-][a-z0-9_-]*//g" -e "s/\s\s*/ /g"`"
-		_nova_opts_exp="`echo "$_nova_opts" | sed -e "s/\s/|/g"`"
+		_nova_opts="`echo "$nbc" | sed -e "s/--[a-z0-9_-]*//g" -e "s/[[:blank:]][[:blank:]]*/ /g"`"
+		_nova_flags="`echo " $nbc" | sed -e "s/ [^-][^-][a-z0-9_-]*//g" -e "s/[[:blank:]][[:blank:]]*/ /g"`"
+		_nova_opts_exp="`echo "$_nova_opts" | sed -e "s/[[:blank:]]/|/g"`"
 	fi
 
 	if [[ " ${COMP_WORDS[@]} " =~ " "($_nova_opts_exp)" " && "$prev" != "help" ]] ; then
